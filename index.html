@@ -39,30 +39,41 @@
 <p>使い方等については下記を参照して下さい。</p>
 <a href="https://github.com/YoshiteruIwasaki/yonaga"><small>View project on</small>GitHub</a>
 
- <h3>レスポンス内容</h3>
+ <h3>サンプル</h3>
+ <p>以下のフォームに判定をしたい文字列を入力して『送信する』を押すと、結果が表示されます。</p>
+ <p><small><a href="http://calmrikyuapi.herokuapp.com/">http://calmrikyuapi.herokuapp.com/</a>をAPIサーバとして利用しています。</small></p>
  <form action="javascript:void(0)">
 <input type="text" value="庭には二羽ニワトリがいる" style="width:80%" id="string" />
 <button>送信する</button>
 </form>
-<hr />
-<h4>結果</h4>
+<h3>結果</h3>
 <div id="result"></div>
 
-  <script type="text/javascript">
-$(function(){
-    $("button").click(function(){
-$.ajax({
-  url: "http://calmrikyuapi.herokuapp.com/" + encodeURIComponent($("#string").val()),
+    <script type="text/javascript">
+    $(function(){
+      $("button").click(function(){
+        $.ajax({
+          url: "http://calmrikyuapi.herokuapp.com/?q=" + encodeURIComponent($("#string").val()),
           type: 'GET',
-	//dataType : 'JSONP',
+          dataType : 'JSONP',
           cache: false, // キャッシュOFF
-}).success(function(data) {
-$("#result").empty();
-  $("#result").append(data.results);
-});
-    })
-})
+        }).success(function(data) {
+          console.log(data);
+          $("#result").empty();
+          var html = "";
+          html +="<p>" + data.sentence;
+          html += "：<span style='font-size:x-large'><strong>" + data.point + "</strong></span></p>";
+          html += "<p>単語別</p><ul>";
+          $.each( data.wordList, function( key, value ) {
+          	html += "<li>" + value.surface + "：" + value.point + "</li>";
+  		  });
+  		  html += "</ul>";
+          $("#result").append(html);
+          });
+          })
+          })
         </script>
+
 
         </section>
 
