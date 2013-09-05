@@ -21,8 +21,12 @@ yonaga.jar をクラスパスに通して使用して下さい。
 使用方法
 ------
 
-    yonaga.Yonaga.init();
-    Yonaga.analyze("分析する文字列");
+    Yonaga.init();
+    Sentence sentence = Yonaga.analyze("分析する文字列");
+    
+    
+Sentenceモデルには分析する文字列、文字列全体での重み付け、文節ごとの重み付け一覧が含まれています。
+
 
 謝辞
 ------
