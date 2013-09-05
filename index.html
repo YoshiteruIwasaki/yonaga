@@ -36,18 +36,19 @@
 <a href="sources/yonaga.jar">yonaga.jar</a> をダウンロードしてご利用下さい。
 
  <h3>使い方</h3>
-<p>使い方等については下記を参照して下さい。</p>
-<a href="https://github.com/YoshiteruIwasaki/yonaga"><small>View project on</small>GitHub</a>
+<p>使い方等については<a href="https://github.com/YoshiteruIwasaki/yonaga">GitHubのプロジェクトページ</a>を参照して下さい。</p>
 
  <h3>サンプル</h3>
  <p>以下のフォームに判定をしたい文字列を入力して『送信する』を押すと、結果が表示されます。</p>
- <p><small><a href="http://calmrikyuapi.herokuapp.com/">http://calmrikyuapi.herokuapp.com/</a>をAPIサーバとして利用しています。</small></p>
+
  <form action="javascript:void(0)">
 <input type="text" value="庭には二羽ニワトリがいる" style="width:80%" id="string" />
 <button>送信する</button>
 </form>
+
 <h3>結果</h3>
 <div id="result"></div>
+<div id="code" style="background:#FFFFFF; border:1px solid #CCCCCC;padding:10px;margin-bottom:10px"></div>
 
     <script type="text/javascript">
     $(function(){
@@ -58,8 +59,8 @@
           dataType : 'JSONP',
           cache: false, // キャッシュOFF
         }).success(function(data) {
-          console.log(data);
           $("#result").empty();
+          $("#code").empty();
           var html = "";
           html +="<p>" + data.sentence;
           html += "：<span style='font-size:x-large'><strong>" + data.point + "</strong></span></p>";
@@ -68,12 +69,22 @@
           	html += "<li>" + value.surface + "：" + value.point + "</li>";
   		  });
   		  html += "</ul>";
+  		  html += "<div>生レスポンス</div>";
           $("#result").append(html);
+          $("#code").text(JSON.stringify(data));
           });
           })
           })
         </script>
+<p><small>結果の取得には<a href="http://calmrikyuapi.herokuapp.com/">http://calmrikyuapi.herokuapp.com/</a>をAPIサーバとして利用しています。</small><br />
+ <small>以下のように直接呼ぶことも可能です。</small></p>
+<pre><code>http://calmrikyuapi.herokuapp.com/?q=&lt;判定したい文字列&gt;&amp;callback=&lt;callback関数&gt;</code></pre>
 
+<h3>謝辞</h3>
+<p>単語の感情極性分類には高村大也氏（東京工業大学）の<a href="http://www.lr.pi.titech.ac.jp/~takamura/pndic_en.html">Semantic Orientations of Words</a>を利用させていただきました。詳細は下記参考文献の通りです。記して感謝いたします。</p>
+
+<h3>参考文献</h3>
+<p>Hiroya Takamura, Takashi Inui, Manabu Okumura, "Extracting Semantic Orientations of Words using Spin Model", In Proceedings of the 43rd Annual Meeting of the Association for Computational Linguistics (ACL2005) , pages 133--140, 2005.</p>
 
         </section>
 
