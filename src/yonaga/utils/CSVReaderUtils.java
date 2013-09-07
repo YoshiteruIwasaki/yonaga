@@ -12,7 +12,7 @@ public class CSVReaderUtils {
 
 	private static final String ALGORITH_FILENAME_EN = "algorithm_en.csv";
 
-	private static final String ALGORITH_FILENAME_JP = "algorithm_jp.csv";
+	private static final String ALGORITH_FILENAME_JA = "algorithm_ja.csv";
 
 	private static final String ALGORITH_PATH = "yonaga/resources/";
 
@@ -27,7 +27,7 @@ public class CSVReaderUtils {
 
 	public static HashMap<Integer, ArrayList<String>> csvToListJp()
 			throws IOException {
-		return csvToList(ALGORITH_PATH + ALGORITH_FILENAME_JP);
+		return csvToList(ALGORITH_PATH + ALGORITH_FILENAME_JA);
 	}
 	/**
 	 * CSV読み込み

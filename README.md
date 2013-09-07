@@ -21,7 +21,7 @@ yonaga.jar をクラスパスに通して使用して下さい。
 使用方法
 ------
 
-    yonaga.Yonaga.init();
+    Yonaga.init();
     Yonaga.analyze("分析する文字列");
 
 謝辞
